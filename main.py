@@ -37,4 +37,10 @@ window = Tk()
 window.title("$ Wunsz game $")
 window.resizable(False, False)
 
+score = 0
+direction = 'down'
+
+label = Label(window, text="Wynik:{}".format(score), font=('consolas', 40))
+label.pack()
+
 window.mainloop()
