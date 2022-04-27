@@ -32,3 +32,9 @@ def check_collisions():
 
 def game_over():
     pass
+
+window = Tk()
+window.title("$ Wunsz game $")
+window.resizable(False, False)
+
+window.mainloop()
