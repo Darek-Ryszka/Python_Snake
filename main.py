@@ -1,13 +1,13 @@
-#$$$$$$$$$$$$$$$$$$$$$$
+# $$$$$$$$$$$$$$$$$$$$$$
 # Snake game in Python
-#$$$$$$$$$$$$$$$$$$$$$$
+# $$$$$$$$$$$$$$$$$$$$$$
 
 from tkinter import *
 import random
 
-GAME_WIDTH = 1000
-GAME_HEIGHT = 1000
-SPEED = 65
+GAME_WIDTH = 1200
+GAME_HEIGHT = 1200
+SPEED = 60
 SPACE_SIZE = 50
 BODY_PARTS = 2
 SNAKE_COLOR = "#00FF00"
@@ -29,16 +29,18 @@ class Snake:
             square = canvas.create_rectangle(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=SNAKE_COLOR, tag="snake")
             self.squares.append(square)
 
+
 class Food:
 
     def __init__(self):
 
-        x = random.randint(0, (GAME_WIDTH / SPACE_SIZE) - 1) * SPACE_SIZE
+        x = random.randint(0, (GAME_WIDTH / SPACE_SIZE)-1) * SPACE_SIZE
         y = random.randint(0, (GAME_HEIGHT / SPACE_SIZE) - 1) * SPACE_SIZE
 
         self.coordinates = [x, y]
 
-        canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=FOOD_COLOR, tag="jedzonko")
+        canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=FOOD_COLOR, tag="food")
+
 
 def next_turn(snake, food):
 
@@ -65,7 +67,7 @@ def next_turn(snake, food):
 
         score += 1
 
-        label.config(text="Score:{}".format(score))
+        label.config(text="Wynik:{}".format(score))
 
         canvas.delete("food")
 
@@ -103,7 +105,8 @@ def change_direction(new_direction):
         if direction != 'up':
             direction = new_direction
 
-def check_collisions():
+
+def check_collisions(snake):
 
     x, y = snake.coordinates[0]
 
@@ -118,14 +121,16 @@ def check_collisions():
 
     return False
 
+
 def game_over():
 
     canvas.delete(ALL)
-    canvas.create_text(canvas.winfo_width() / 2, canvas.winfo_height() / 2,
-                       font=('consolas', 70), text="GAME OVER", fill="red", tag="gameover")
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
+                       font=('consolas',70), text="YOU DIED", fill="red", tag="gameover")
+
 
 window = Tk()
-window.title("$ Wunsz game $")
+window.title(" $ Wunsz game $ ")
 window.resizable(False, False)
 
 score = 0
@@ -156,5 +161,7 @@ window.bind('<Down>', lambda event: change_direction('down'))
 
 snake = Snake()
 food = Food()
+
+next_turn(snake, food)
 
 window.mainloop()
