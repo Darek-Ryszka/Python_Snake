@@ -2,7 +2,7 @@
 Snake game
 
 ## General info
-This project is simple Snake game using Tkinter library 
+This project is a simple Snake game using Tkinter library 
 
 ## Technologies
 * Pytohon version: 3.8
