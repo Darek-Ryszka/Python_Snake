@@ -5,9 +5,9 @@
 from tkinter import *
 import random
 
-GAME_WIDTH = 1200
-GAME_HEIGHT = 1200
-SPEED = 60
+GAME_WIDTH = 1000
+GAME_HEIGHT = 1000
+SPEED = 90
 SPACE_SIZE = 50
 BODY_PARTS = 1
 SNAKE_COLOR = "#00FF00"
@@ -129,6 +129,17 @@ def game_over():
                        font=('consolas',70), text="YOU DIED", fill="red", tag="gameover")
 
 
+def restart():
+    global score, direction, snake, food
+    score = 0
+    direction = 'down'
+    label.config(text="Wynik:{}".format(score))
+    canvas.delete("all")
+    snake = Snake()
+    food = Food()
+    next_turn(snake, food)
+
+
 window = Tk()
 window.title(" $ Wunsz game $ ")
 window.resizable(False, False)
@@ -138,6 +149,9 @@ direction = 'down'
 
 label = Label(window, text="Wynik:{}".format(score), font=('consolas', 40))
 label.pack()
+
+button = Button(window, text="Restart", command=restart, font=('consolas', 15))
+button.pack()
 
 canvas = Canvas(window, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDTH)
 canvas.pack()
